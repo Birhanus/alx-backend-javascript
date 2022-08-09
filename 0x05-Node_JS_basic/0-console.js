@@ -3,8 +3,8 @@
   *@param string
   *@author Birhanu Shimles
   */
-function desplayMessage (a) {
+const desplayMessage = (a) => {
   console.log(`${a}`);
-}
+};
 
 module.exports = desplayMessage;
