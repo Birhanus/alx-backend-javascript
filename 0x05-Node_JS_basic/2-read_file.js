@@ -1,32 +1,22 @@
 const fs = require('fs');
 
 const countStudents = (path) => {
-	  if (!fs.existsSync(path)) throw new Error('Cannot load the database');
+  if (!fs.existsSync(path)) throw new Error('Cannot load the database');
 
-	  const data = fs.readFileSync(path, 'utf8');
+  const data = fs.readFileSync(path, 'utf8');
 
-	  // split where a new line exists
+  // split where a new line exists
+  const students = data.split('\n')
+    // turn a row into an array by splitting by a ','
+    .map((row) => row.split(','))
 
-	  const students = data.split('\n')
-
-		  // turn a row into an array by splitting by a ','
-
-		  .map((row) => row.split(','))
-
-		  // skip first row
-
-		  .filter((row) => row.length === 4 && row[0] !== 'firstname')
-
-		  // covert into objects
-
-		  .map((row) => ({
-
+    // skip first row
+    .filter((row) => row.length === 4 && row[0] !== 'firstname')
+    // covert into objects
+    .map((row) => ({
       firstName: row[0],
-
       lastName: row[1],
-
       age: row[2],
-
       field: row[3].replace('\r', '')
 
     }));
